@@ -21,7 +21,7 @@ public class DocumentServiceController {
     @GetMapping(value = "/stream", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<Flux<DataBuffer>> streamPdf() {
         try {
-            Path path = new ClassPathResource("Prajakta.pdf").getFile().toPath();
+            Path path = new ClassPathResource("sample.mp4").getFile().toPath();
             DefaultDataBufferFactory bufferFactory = DefaultDataBufferFactory.sharedInstance;
             Flux<DataBuffer> dataBufferFlux = Flux.using(
                     () -> Files.newInputStream(path), // Open the InputStream for the file
@@ -51,7 +51,7 @@ public class DocumentServiceController {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            headers.setContentDispositionFormData("attachment", "Prajakta.pdf"); // Downloadable filename
+            headers.setContentDispositionFormData("attachment", "sample.mp4"); // Downloadable filename
 
             return ResponseEntity.ok()
                     .headers(headers)
